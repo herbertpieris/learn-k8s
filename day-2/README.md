@@ -14,8 +14,8 @@ sudo nano /etc/hosts
 Add (append) lines below to the content of `/etc/hosts`
 
 ```bash
-10.91.12.53 master-01.kubernetes.local master-01
-10.91.12.51 node-01.kubernetes.local node-01
+10.102.12.112 master-01.kubernetes.local master-01
+10.102.12.111 node-01.kubernetes.local node-01
 ```
 
 Try to ping the host by its hostname
@@ -200,20 +200,20 @@ openssl x509 -req -days 3653 -in ./certs/admin.csr \
 
 ```bash
 # replace 'debian' with your ssh username
-ssh debian@10.91.12.53 mkdir -p /home/debian/k8s/1.32.3/certs
-scp ./certs/ca.key ./certs/ca.crt ./certs/kube-apiserver.key ./certs/kube-apiserver.crt ./certs/kube-controller-manager.crt ./certs/kube-controller-manager.key ./certs/kube-scheduler.crt ./certs/kube-scheduler.key ./certs/service-accounts.key ./certs/service-accounts.crt ./certs/admin.crt ./certs/admin.key debian@10.91.12.53:/home/debian/k8s/1.32.3/certs/
+ssh debian@10.102.12.112 mkdir -p /home/debian/k8s/1.32.3/certs
+scp ./certs/ca.key ./certs/ca.crt ./certs/kube-apiserver.key ./certs/kube-apiserver.crt ./certs/kube-controller-manager.crt ./certs/kube-controller-manager.key ./certs/kube-scheduler.crt ./certs/kube-scheduler.key ./certs/service-accounts.key ./certs/service-accounts.crt ./certs/admin.crt ./certs/admin.key debian@10.102.12.112:/home/debian/k8s/1.32.3/certs/
 ```
 
 ### Distribute the client certificates
 
 ```bash
 # replace 'debian' with your ssh username
-ssh debian@10.91.12.51 mkdir -p /home/debian/k8s/1.32.3/certs
-scp ./certs/ca.crt debian@10.91.12.51:/home/debian/k8s/1.32.3/certs/ca.crt
-scp ./certs/node-01.crt debian@10.91.12.51:/home/debian/k8s/1.32.3/certs/kubelet.crt
-scp ./certs/node-01.key debian@10.91.12.51:/home/debian/k8s/1.32.3/certs/kubelet.key
-scp ./certs/kube-proxy.crt debian@10.91.12.51:/home/debian/k8s/1.32.3/certs/kube-proxy.crt
-scp ./certs/kube-proxy.key debian@10.91.12.51:/home/debian/k8s/1.32.3/certs/kube-proxy.key
+ssh debian@10.102.12.111 mkdir -p /home/debian/k8s/1.32.3/certs
+scp ./certs/ca.crt debian@10.102.12.111:/home/debian/k8s/1.32.3/certs/ca.crt
+scp ./certs/node-01.crt debian@10.102.12.111:/home/debian/k8s/1.32.3/certs/kubelet.crt
+scp ./certs/node-01.key debian@10.102.12.111:/home/debian/k8s/1.32.3/certs/kubelet.key
+scp ./certs/kube-proxy.crt debian@10.102.12.111:/home/debian/k8s/1.32.3/certs/kube-proxy.crt
+scp ./certs/kube-proxy.key debian@10.102.12.111:/home/debian/k8s/1.32.3/certs/kube-proxy.key
 ```
 
 ## Generate Kubernetes Configuration Files
@@ -379,7 +379,7 @@ resources:
       - aescbc:
           keys:
             - name: key1
-              secret: ENCRYPTION_KEY ## replace this with generated key
+              secret: NsW8ANa6mXssM1WtCfIZrhTocMflSJrjfLHq8Rf+jyg= ## replace this with generated key
       - identity: {}
 ```
 
